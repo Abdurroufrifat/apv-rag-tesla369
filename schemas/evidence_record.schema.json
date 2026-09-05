@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/sciattr369-evidence-record.schema.json",
+  "title": "SciAttr-369 Evidence Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "evidence_id",
+    "claim_id",
+    "title",
+    "creator",
+    "publisher_or_archive",
+    "publication_date",
+    "source_url",
+    "access_date",
+    "source_type",
+    "source_rank",
+    "is_primary",
+    "location_pointer",
+    "stance",
+    "evidence_summary",
+    "provenance_family_id",
+    "parent_evidence_id",
+    "provenance_relation",
+    "provenance_confidence",
+    "ocr_status",
+    "verification_status",
+    "annotator_id",
+    "notes"
+  ],
+  "properties": {
+    "evidence_id": {"type": "string", "pattern": "^EVID-[0-9]{3,}$"},
+    "claim_id": {"type": "string", "pattern": "^T369-[0-9]{3,}$"},
+    "title": {"type": "string", "minLength": 1},
+    "creator": {"type": "string"},
+    "publisher_or_archive": {"type": "string", "minLength": 1},
+    "publication_date": {"type": "string"},
+    "source_url": {"type": "string", "format": "uri"},
+    "access_date": {"type": "string", "format": "date"},
+    "source_type": {"type": "string", "minLength": 1},
+    "source_rank": {"type": "integer", "minimum": 1, "maximum": 5},
+    "is_primary": {"type": "boolean"},
+    "location_pointer": {"type": "string"},
+    "stance": {"enum": ["supports", "refutes", "mentions_only", "unrelated"]},
+    "evidence_summary": {"type": "string", "minLength": 10},
+    "provenance_family_id": {"type": "string", "minLength": 1},
+    "parent_evidence_id": {"type": "string"},
+    "provenance_relation": {
+      "enum": ["original", "quotes", "cites", "paraphrases", "mirrors", "syndicates", "unknown"]
+    },
+    "provenance_confidence": {"enum": ["high", "medium", "low"]},
+    "ocr_status": {
+      "enum": [
+        "not_applicable",
+        "scan_available",
+        "ocr_plus_scan",
+        "digital_text",
+        "transcription_available",
+        "transcription_unchecked"
+      ]
+    },
+    "verification_status": {
+      "enum": [
+        "screened",
+        "metadata_verified",
+        "needs_scan_check",
+        "needs_page_review",
+        "needs_full_text_review"
+      ]
+    },
+    "annotator_id": {"type": "string", "minLength": 1},
+    "notes": {"type": "string"}
+  }
+}
+
