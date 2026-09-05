@@ -1,0 +1,44 @@
+project:
+  name: apv-rag-tesla369
+  dataset_name: SciAttr-369
+  random_seed: 369
+  language: en
+
+labels:
+  verdict:
+    - authenticated
+    - misattributed
+    - contradicted
+    - insufficient
+  evidence_stance:
+    - supports
+    - refutes
+    - mentions_only
+    - unrelated
+  sufficiency:
+    - sufficient
+    - insufficient
+
+splits:
+  train: 0.70
+  validation: 0.15
+  test: 0.15
+  group_by:
+    - canonical_claim_id
+    - provenance_family_id
+
+retrieval:
+  lexical_top_k: 50
+  dense_top_k: 50
+  rerank_top_k: 20
+  evidence_top_k: 8
+
+robustness:
+  copy_counts: [0, 1, 5, 10, 25]
+  ocr_noise_rates: [0.00, 0.05, 0.10, 0.20]
+  fabricated_citation: [false, true]
+  authoritative_rewrite: [false, true]
+
+calibration:
+  target_coverages: [0.50, 0.70, 0.80, 0.90, 1.00]
+

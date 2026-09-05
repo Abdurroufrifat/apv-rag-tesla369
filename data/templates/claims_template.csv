@@ -1,0 +1,4 @@
+claim_id,canonical_claim_id,claim_text,claimed_person,claim_type,language,verdict,verdict_confidence,sufficiency,source_urls,provenance_family_ids,review_status,annotator_id,notes
+T369-001,T369-C001,"Nikola Tesla said: If you only knew the magnificence of the 3, 6 and 9, then you would have a key to the universe.",Nikola Tesla,quotation,en,insufficient,0.50,insufficient,,,pilot,UNASSIGNED,"Starter hypothesis only; requires documented archive search and independent annotation."
+T369-002,T369-C002,"Nikola Tesla described repetitive habits involving actions divisible by three.",Nikola Tesla,behavior,en,insufficient,0.50,insufficient,,,pilot,UNASSIGNED,"Keep separate from the viral quotation; authenticate against a primary text before changing the label."
+

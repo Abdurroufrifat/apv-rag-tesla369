@@ -1,0 +1,10 @@
+-r requirements-local.txt
+numpy>=1.26,<3
+pandas>=2.2,<3
+scikit-learn>=1.5,<2
+networkx>=3.3,<4
+sentence-transformers>=3.3,<6
+transformers>=4.47,<6
+accelerate>=1.2,<2
+faiss-cpu>=1.9,<2
+

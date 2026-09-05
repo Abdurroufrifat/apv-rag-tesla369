@@ -1,0 +1,8 @@
+paper_id,title,authors,year,venue,doi_or_url,topic,dataset,method,baselines,metrics,key_result,limitation,relevance_to_apv_rag,quality_notes,status
+LIT-001,,,,,,RAG factuality,,,,,,,"Identify how factuality is evaluated",,to_read
+LIT-002,,,,,,automated claim verification,,,,,,,"Compare verification architectures",,to_read
+LIT-003,,,,,,source provenance,,,,,,,"Define provenance graph features",,to_read
+LIT-004,,,,,,citation verification,,,,,,,"Design citation correctness metrics",,to_read
+LIT-005,,,,,,calibration and abstention,,,,,,,"Design selective prediction evaluation",,to_read
+LIT-006,,,,,,historical archives and OCR,,,,,,,"Design archive/OCR robustness test",,to_read
+
