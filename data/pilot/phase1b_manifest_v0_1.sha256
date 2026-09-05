@@ -1,0 +1,7 @@
+# SciAttr-369 Phase 1B pilot dataset manifest
+# Generated: 2026-09-05
+# Protocol: 0.1
+2c687ac26578e4ca9ec26c4e659b4a3a06f1c93b90d485d57bf1bc56c60b7e68  data/pilot/tesla_phase1b_evidence_v0_1.csv
+28d6241646f08e3340d010d4ce5d8af938c63cc9eaefed57cf14bf375c33ea0c  data/pilot/tesla_phase1b_search_log_v0_1.csv
+8f65004b56bd44963eed994ed4bafa08d4935599c1e0c0b5b43ffc694a82d572  data/pilot/tesla_phase1b_verdicts_v0_1.csv
+684c3445523ed776c9c095b5ad5cb27ef2ded1f043ad07c32343102155e15d5c  data/pilot/tesla_phase1b_provenance_edges_v0_1.csv

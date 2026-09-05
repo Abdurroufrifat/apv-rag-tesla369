@@ -1,0 +1,12 @@
+edge_id,child_evidence_id,parent_evidence_id,relation,confidence,dependency_signals,rationale
+EDGE-001,EVID-103,EVID-102,cites,high,"explicit_citation;chronology;shared_wording","The fact-check links the dated Nerd Business post and reproduces its wording."
+EDGE-002,EVID-104,EVID-102,unknown,medium,"shared_wording;chronology","The later page repeats the unusual full wording, but no direct link establishes the copying path."
+EDGE-003,EVID-106,EVID-105,unknown,medium,"shared_wording;chronology;near_duplicate","Both pages reproduce the same Bergstresser commercial-origin passage; a common upstream sales page is likely."
+EDGE-004,EVID-107,EVID-106,cites,high,"explicit_citation;same_url_target;shared_wording","Wikiquote explicitly points to the Biblioteca Pleyades mirror for its disputed attribution."
+EDGE-005,EVID-110,EVID-106,citation_mismatch,high,"explicit_citation;same_url_target;content_comparison","Wikiquote cites this target for the receiver wording, but comparison shows that the target contains only the energy-frequency sentence."
+EDGE-006,EVID-111,EVID-109,unknown,medium,"shared_wording;chronology","The later post repeats the distinctive receiver passage, but its upstream path is not disclosed."
+EDGE-007,EVID-113,EVID-112,quotes,high,"explicit_citation;archive_metadata;content_comparison","The 2016 Politika retrospective identifies the 1927 issue and reproduces its Serbian passage."
+EDGE-008,EVID-114,EVID-112,cites,high,"explicit_citation;archive_metadata;shared_wording","Wikiquote identifies the same dated Politika interview as its source."
+EDGE-009,EVID-116,EVID-115,citation_mismatch,high,"explicit_citation;same_url_target;content_comparison","The quote page links the 1905 article, but the displayed article lacks the present-versus-future sentences."
+EDGE-010,EVID-118,EVID-117,unknown,medium,"shared_wording;chronology","The institutional page follows the school magazine and uses near-identical South Slavic wording without naming a source."
+EDGE-011,EVID-120,EVID-113,unknown,medium,"shared_wording;chronology","The 2022 scholarly epigraph uses the familiar English rendering after the 2016 transcription, but provides no lineage."

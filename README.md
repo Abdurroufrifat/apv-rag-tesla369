@@ -33,6 +33,15 @@ Every conclusion in the paper must follow from documented evidence and uncertain
 
 Read [`START_HERE.md`](START_HERE.md), then run the environment check and tests. Do not download large datasets or train a model until Phase 1 is complete.
 
+## Current milestone
+
+Phase 1B now contains a five-claim archival-verification pilot. Its 20 evidence
+records, 35 executed searches, and 11 provenance edges yield one provisional
+authentication (`T369-004`, material meaning supported by a 1927 Serbian interview)
+and four `insufficient` outcomes. These are machine-assisted pre-annotations, not
+gold labels. Read [`docs/PHASE_1B_PILOT_REPORT.md`](docs/PHASE_1B_PILOT_REPORT.md)
+and complete independent human review before model training.
+
 ## Repository map
 
 | Path | Purpose |
@@ -41,12 +50,17 @@ Read [`START_HERE.md`](START_HERE.md), then run the environment check and tests.
 | `docs/PROJECT_CHARTER.md` | Research questions, novelty, experiments, and publication plan |
 | `docs/DATA_PROTOCOL.md` | Dataset construction and annotation rules |
 | `docs/PHASE_1_CHECKLIST.md` | First milestone and completion criteria |
+| `docs/PHASE_1B_PILOT_REPORT.md` | Five-claim archival findings and ML implications |
+| `docs/PHASE_1B_HUMAN_REVIEW.md` | Independent annotation and bilingual-review checklist |
 | `docs/literature_matrix.csv` | Structured literature-review template |
+| `data/pilot/tesla_phase1b_search_log_v0_1.csv` | Executed searches and access limitations |
+| `data/pilot/tesla_phase1b_provenance_edges_v0_1.csv` | Source-dependency and citation-mismatch graph |
 | `data/templates/claims_template.csv` | Claim-record template |
 | `schemas/claim_record.schema.json` | Machine-readable record schema |
 | `src/apv_rag/` | Lightweight validation package |
 | `scripts/check_environment.py` | Reports local hardware and Python setup |
 | `scripts/validate_claims.py` | Validates a claim CSV before experiments |
+| `scripts/validate_phase1b.py` | Validates all Phase 1B records and cross-references |
 | `notebooks/00_colab_setup.ipynb` | Cloud/GPU environment check |
 | `config/project.yaml` | Reproducible project settings |
 
@@ -56,4 +70,3 @@ Read [`START_HERE.md`](START_HERE.md), then run the environment check and tests.
 - **Google Colab/cloud GPU:** sentence embeddings at scale, transformer fine-tuning/inference, and optional local-LLM experiments.
 
 This split keeps the project reproducible and avoids spending cloud compute before the data protocol is stable.
-

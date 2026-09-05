@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/sciattr369-provenance-edge.schema.json",
+  "title": "SciAttr-369 Provenance Edge",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "edge_id",
+    "child_evidence_id",
+    "parent_evidence_id",
+    "relation",
+    "confidence",
+    "dependency_signals",
+    "rationale"
+  ],
+  "properties": {
+    "edge_id": {"type": "string", "pattern": "^EDGE-[0-9]{3,}$"},
+    "child_evidence_id": {"type": "string", "pattern": "^EVID-[0-9]{3,}$"},
+    "parent_evidence_id": {"type": "string", "pattern": "^EVID-[0-9]{3,}$"},
+    "relation": {
+      "enum": [
+        "quotes",
+        "cites",
+        "paraphrases",
+        "mirrors",
+        "syndicates",
+        "unknown",
+        "citation_mismatch"
+      ]
+    },
+    "confidence": {"enum": ["high", "medium", "low"]},
+    "dependency_signals": {"type": "string", "minLength": 1},
+    "rationale": {"type": "string", "minLength": 20}
+  }
+}

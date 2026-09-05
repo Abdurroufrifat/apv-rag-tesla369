@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/sciattr369-search-execution.schema.json",
+  "title": "SciAttr-369 Search Execution",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "execution_id",
+    "search_id",
+    "claim_id",
+    "stage",
+    "source_tier",
+    "repository_or_index",
+    "search_interface",
+    "query_variant",
+    "query_text",
+    "executed_at_utc",
+    "result_status",
+    "authenticating_result",
+    "evidence_ids",
+    "earliest_located_date",
+    "limitations",
+    "executor_id"
+  ],
+  "properties": {
+    "execution_id": {"type": "string", "pattern": "^RUN-[0-9]{3,}$"},
+    "search_id": {"type": "string", "pattern": "^SEARCH-[0-9]{3,}$"},
+    "claim_id": {"type": "string", "pattern": "^T369-[0-9]{3,}$"},
+    "stage": {
+      "enum": [
+        "tier_a_primary",
+        "tier_b_scholarly",
+        "tier_c_curated",
+        "tier_d_propagation",
+        "upstream_trace"
+      ]
+    },
+    "source_tier": {"enum": ["A", "B", "C", "D"]},
+    "repository_or_index": {"type": "string", "minLength": 1},
+    "search_interface": {
+      "enum": [
+        "archive_ui",
+        "direct_document_search",
+        "web_domain_query",
+        "scholarly_index_query",
+        "backward_citation_trace",
+        "scan_viewer"
+      ]
+    },
+    "query_variant": {
+      "enum": ["exact", "fragment", "concept", "translation", "source_specific", "upstream"]
+    },
+    "query_text": {"type": "string", "minLength": 1},
+    "executed_at_utc": {"type": "string", "format": "date-time"},
+    "result_status": {
+      "enum": [
+        "authenticating_source_located",
+        "occurrence_only",
+        "contextual_result",
+        "no_authenticating_result",
+        "blocked"
+      ]
+    },
+    "authenticating_result": {"type": "boolean"},
+    "evidence_ids": {"type": "string"},
+    "earliest_located_date": {"type": "string"},
+    "limitations": {"type": "string", "minLength": 1},
+    "executor_id": {"type": "string", "minLength": 1}
+  }
+}

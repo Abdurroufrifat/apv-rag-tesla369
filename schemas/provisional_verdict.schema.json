@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/sciattr369-provisional-verdict.schema.json",
+  "title": "SciAttr-369 Phase 1B Provisional Verdict",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "claim_id",
+    "provisional_verdict",
+    "verdict_confidence",
+    "sufficiency",
+    "label_status",
+    "requires_human_review",
+    "decisive_evidence_ids",
+    "provenance_family_ids",
+    "rationale",
+    "missing_evidence",
+    "next_human_action",
+    "annotator_id",
+    "annotation_date",
+    "protocol_version"
+  ],
+  "properties": {
+    "claim_id": {"type": "string", "pattern": "^T369-[0-9]{3,}$"},
+    "provisional_verdict": {
+      "enum": ["authenticated", "misattributed", "contradicted", "insufficient"]
+    },
+    "verdict_confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "sufficiency": {"enum": ["sufficient", "insufficient"]},
+    "label_status": {"const": "machine_assisted_provisional"},
+    "requires_human_review": {"const": true},
+    "decisive_evidence_ids": {"type": "string"},
+    "provenance_family_ids": {"type": "string", "minLength": 1},
+    "rationale": {"type": "string", "minLength": 40},
+    "missing_evidence": {"type": "string"},
+    "next_human_action": {"type": "string", "minLength": 1},
+    "annotator_id": {"type": "string", "minLength": 1},
+    "annotation_date": {"type": "string", "format": "date"},
+    "protocol_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+$"}
+  }
+}
