@@ -1,0 +1,116 @@
+Metadata-Version: 2.4
+Name: apv-rag
+Version: 0.1.0
+Summary: Archive- and provenance-aware RAG for scientific-attribution verification
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: PyYAML<7,>=6.0
+Requires-Dist: jsonschema<5,>=4.23
+Requires-Dist: psutil<8,>=6.0
+Requires-Dist: numpy<3,>=1.26
+Requires-Dist: scikit-learn<2,>=1.5
+Requires-Dist: matplotlib<4,>=3.8
+Provides-Extra: dev
+Requires-Dist: pytest<9,>=8.3; extra == "dev"
+Requires-Dist: ruff<1,>=0.9; extra == "dev"
+
+# APV-RAG: Provenance-Aware Verification with a Tesla 3-6-9 Stress Test
+
+This repository is the starter workspace for the proposed paper:
+
+> **Repetition Is Not Evidence: Provenance-Aware and Abstention-Calibrated RAG for Claim Verification, with a Tesla 3-6-9 Archival Stress Test**
+
+The project treats the popular “Tesla 3-6-9 code” as a **misattribution-verification case study**, not as an established scientific law. The central machine-learning question is whether a retrieval-augmented system can distinguish independent archival evidence from many websites that repeat the same unsupported attribution.
+
+**Current milestone:** Phase 2E adds a reproducible, machine-only
+evidence-disagreement ablation for the rare conflicting-evidence class. The
+official AVeriTeC development set remains sealed for final evaluation.
+
+Phase 2F adds source-family normalization and duplicate-evidence features while
+keeping the same frozen machine-only evaluation protocol.
+
+## Proposed contribution
+
+The planned system, **APV-RAG** (Archival Provenance Verification RAG), combines:
+
+1. hybrid retrieval from primary archives, scholarly sources, and the open web;
+2. source-type and source-quality estimation;
+3. a temporal provenance graph that collapses copied or derivative sources;
+4. claim–evidence stance and evidence-sufficiency prediction;
+5. calibrated abstention when the available evidence cannot justify a verdict; and
+6. citation-constrained explanations.
+
+The primary quantitative evaluation uses existing labeled fact-verification
+benchmarks. The Tesla 3-6-9 material is an unlabeled archival stress test used to
+measure retrieval, provenance, OCR robustness, and abstention. It is not used as
+ground truth and the system does not authenticate a historical quotation.
+
+## Important scientific rule
+
+Do not write that Tesla discovered a mystical “369 code.” The defensible starting position is:
+
+- the widely shared “magnificence of 3, 6 and 9” quotation is not currently authenticated by a traceable primary source;
+- Tesla’s autobiographical writing does report repetitive habits involving actions divisible by three; and
+- those are different claims and must have separate evidence records.
+
+Every conclusion in the paper must follow from documented evidence and uncertainty labels.
+
+## Start here
+
+Read [`START_HERE.md`](START_HERE.md), then run the environment check and tests. Do not download large datasets or train a model until Phase 1 is complete.
+
+## Current milestone
+
+Phase 2D adds class-balanced word, character, and hybrid evidence models using
+the leakage-safe AVeriTeC partition. The selected hybrid model improves internal
+validation Macro-F1 from 0.4627 to 0.4840 and raises conflict-class F1 from
+0.0000 to 0.0488. The official development set stays unused. Read
+[`docs/PHASE_2D_IMBALANCE_BASELINE.md`](docs/PHASE_2D_IMBALANCE_BASELINE.md).
+
+The five Tesla claims remain machine-generated archival observations without gold
+verdicts. They are not used to train or select the AVeriTeC baseline. The former
+human-review route is archived and is not part of the study.
+
+## Repository map
+
+| Path | Purpose |
+|---|---|
+| `START_HERE.md` | Exact setup instructions for Windows and Colab |
+| `docs/PROJECT_CHARTER.md` | Research questions, novelty, experiments, and publication plan |
+| `docs/DATA_PROTOCOL.md` | Dataset construction and annotation rules |
+| `docs/PHASE_1_CHECKLIST.md` | First milestone and completion criteria |
+| `docs/PHASE_1B_PILOT_REPORT.md` | Five-claim archival findings and ML implications |
+| `docs/MACHINE_ONLY_PROTOCOL.md` | Binding no-human-review scientific protocol |
+| `docs/PHASE_2_BENCHMARK_PLAN.md` | Datasets, baselines, metrics, ablations, and exit criteria |
+| `docs/PHASE_2A_AVERITEC_SETUP.md` | Exact official AVeriTeC acquisition and validation steps |
+| `docs/PHASE_2B_SPLIT_PROTOCOL.md` | Leakage-safe internal train/validation partition |
+| `docs/PHASE_2C_EVIDENCE_BASELINE.md` | Evidence-baseline method and exact Windows commands |
+| `docs/PHASE_2D_IMBALANCE_BASELINE.md` | Imbalance-aware models, verified results, and Windows commands |
+| `docs/literature_matrix.csv` | Structured literature-review template |
+| `data/pilot/tesla_phase1b_search_log_v0_1.csv` | Executed searches and access limitations |
+| `data/pilot/tesla_phase1b_provenance_edges_v0_1.csv` | Source-dependency and citation-mismatch graph |
+| `data/templates/claims_template.csv` | Claim-record template |
+| `schemas/claim_record.schema.json` | Machine-readable record schema |
+| `src/apv_rag/` | Lightweight validation package |
+| `scripts/check_environment.py` | Reports local hardware and Python setup |
+| `scripts/validate_claims.py` | Validates a claim CSV before experiments |
+| `scripts/validate_phase1b.py` | Validates all Phase 1B records and cross-references |
+| `scripts/validate_phase1c.py` | Validates the Phase 1C package and private capture hash |
+| `scripts/validate_phase2.py` | Validates the machine-only benchmark protocol |
+| `scripts/download_averitec.py` | Downloads the pinned official AVeriTeC train/dev files |
+| `scripts/validate_averitec.py` | Checks hashes, structure, counts, labels, and manifest |
+| `scripts/build_averitec_splits.py` | Builds connected-group internal splits from official train data |
+| `scripts/validate_averitec_splits.py` | Audits completeness, hashes, ratios, and group leakage |
+| `scripts/run_evidence_baseline.py` | Fits and evaluates the frozen Phase 2C baseline |
+| `scripts/validate_evidence_baseline.py` | Validates Phase 2C artifacts and recomputed metrics |
+| `scripts/run_imbalance_baseline.py` | Fits Phase 2D word, character, and hybrid models |
+| `scripts/validate_imbalance_baseline.py` | Validates Phase 2D inputs, outputs, and predictions |
+| `notebooks/00_colab_setup.ipynb` | Cloud/GPU environment check |
+| `config/project.yaml` | Reproducible project settings |
+
+## Planned compute split
+
+- **Local Windows laptop (16 GB RAM):** writing, source collection, annotation, preprocessing, unit tests, classical baselines, evaluation, plots, and paper assembly.
+- **Google Colab/cloud GPU:** sentence embeddings at scale, transformer fine-tuning/inference, and optional local-LLM experiments.
+
+This split keeps the project reproducible and avoids spending cloud compute before the data protocol is stable.

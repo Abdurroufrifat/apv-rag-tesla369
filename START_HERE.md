@@ -1,81 +1,17 @@
-# Start Here
+# Current project status
 
-Complete only the steps in this file first. They establish a reproducible local environment and verify that the starter kit works.
+The saved English explanation diagnostic is received and verified: 840 explanations, 2520 scored passage pairs and zero token-budget skips. Windows and local verification content agrees after line-ending normalization. The bounded analysis is in `artifacts/explanation_diagnostic_analysis_v1/RESULTS.md`; no rerun is needed.
 
-## A. Local setup in VS Code (Windows 11)
+The next saved-data step is complete: 6,600 multilingual verdicts were aligned and a Qwen/NLI agreement rule replayed across eleven files. It rejects 1,169 otherwise correct Qwen answers; results are in `artifacts/multilingual_agreement_replay_v1/RESULTS.md`. It is an exploratory supplied-evidence diagnostic, not a full multilingual retrieval or gate result.
 
-1. Extract the project ZIP to a short path, for example:
+The saved multilingual NLI probability audit is now in `artifacts/xfever_reliability_audit_v1/RESULTS.md`. It reports fixed-bin reliability on the same eleven supplied-evidence files; no new model run or fitted calibrator is claimed.
 
-   `C:\research\apv-rag-tesla369`
+The optional source-snapshot control is now connected to all four policies in a separate wrapper. Its cached replay and per-policy results are in `artifacts/bound_policy_integration_v1/RESULTS.md`. This update does not require a new model run.
 
-2. Open that folder in VS Code: **File → Open Folder**.
+A fresh local reproducibility audit now passes the full test suite and eight other commands. See `artifacts/reproducibility_audit_2026_10_04/RESULTS.md` for 30 still-missing files from older exports; keep those originals in your Windows project.
 
-3. Open a PowerShell terminal in VS Code: **Terminal → New Terminal**.
+The next external evaluation input is prepared: 300 FEVER claims selected without using labels and checked against prior XFEVER IDs. The Wikipedia archive is not included, and no FEVER model run has been done. See `docs/FEVER_EXTERNAL_EVALUATION.md`.
 
-   If you prefer the guided automatic setup, run the command below and then skip to Step 8:
+Extract this update directly into your existing `D:\apv-rag-tesla369` folder, replacing matching files and preserving `.venv`, models and caches. No command is needed for this update.
 
-   ```powershell
-   .\scripts\setup_windows.cmd
-   ```
-
-4. Create and activate an isolated Python environment:
-
-   ```powershell
-   py -3 -m venv .venv
-   .\.venv\Scripts\Activate.ps1
-   ```
-
-5. Upgrade pip and install only the lightweight local dependencies:
-
-   ```powershell
-   python -m pip install --upgrade pip
-   pip install -r requirements-local.txt
-   ```
-
-6. Run the hardware/environment report:
-
-   ```powershell
-   python scripts/check_environment.py
-   ```
-
-7. Run the tests:
-
-   ```powershell
-   pytest -q
-   ```
-
-8. Validate the included claim template (the automatic setup already does this):
-
-   ```powershell
-   python scripts/validate_claims.py data/templates/claims_template.csv
-   ```
-
-Expected result: the tests pass and the validator reports two valid starter records.
-
-If PowerShell blocks activation, run this command once in the same terminal and repeat Step 4:
-
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-```
-
-This changes policy only for the current terminal session.
-
-## B. Colab check (after local tests pass)
-
-1. Go to [Google Colab](https://colab.research.google.com/).
-2. Upload `notebooks/00_colab_setup.ipynb`.
-3. Select **Runtime → Change runtime type → T4 GPU** when available.
-4. Run all cells.
-5. Save the notebook output to Google Drive or download the executed notebook.
-
-The notebook only checks the cloud environment and installs Phase-1 packages. It does not train a model or incur deliberate paid-cloud usage.
-
-## C. What to send back
-
-Copy or screenshot these three items:
-
-1. the output of `python scripts/check_environment.py`;
-2. the output of `pytest -q`; and
-3. the Colab GPU line, if you ran the notebook.
-
-Once these pass, the next project step is **Phase 1A: build the search protocol and collect the first 20 Tesla attribution records**.
+Original-cohort mean maximum passage entailment scores are 0.2701 for SciFact and 0.3306 for retrieved climate; these scores do not measure factual explanation accuracy. Source authentication, explanation truth, multilingual gate/retrieval integration and confidence calibration remain open. No human annotation is requested. Manuscript writing awaits your permission and GitHub publication remains paused.

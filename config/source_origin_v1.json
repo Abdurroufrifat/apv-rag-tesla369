@@ -1,0 +1,29 @@
+{
+  "protocol": "source_origin_v1",
+  "sources": [
+    {
+      "key": "politika_1927_04_27",
+      "url": "https://digitalna.nb.rs/view/URN:NB:RS:SD_2F6F6602455A67B1B521D786232CBF4A-1927-04-27",
+      "anchors": ["URN:NB:RS:SD_2F6F6602455A67B1B521D786232CBF4A-1927-04-27", "Политика", "27. април 1927."],
+      "evidence_role": "catalogue_metadata",
+      "redirect_urls": [],
+      "scope": "Issue catalogue metadata only. Newspaper images, transcription and quote attribution are outside this capture."
+    },
+    {
+      "key": "loc_tesla_guide",
+      "url": "https://guides.loc.gov/chronicling-america-nikola-tesla",
+      "anchors": ["Nikola Tesla", "Chronicling America"],
+      "evidence_role": "institutional_navigation",
+      "redirect_urls": [],
+      "scope": "Curated guide page only. Linked newspaper pages are not implicitly captured or authenticated."
+    },
+    {
+      "key": "tesla_museum_life_work",
+      "url": "https://tesla-museum.org/en/nikola-tesla-2/life-and-work/",
+      "anchors": ["Nikola Tesla", "Life and work"],
+      "evidence_role": "institutional_navigation",
+      "redirect_urls": [],
+      "scope": "Institutional navigation page only. Embedded third-party timeline and historical claims are outside this capture."
+    }
+  ]
+}

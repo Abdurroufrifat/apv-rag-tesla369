@@ -1,0 +1,26 @@
+# Development-only calibration and fresh claim confirmation
+
+This extension follows the verified 300-claim FEVER NLI baseline, whose accuracy was 47.33% and mean confidence 76.83%. The earlier claims and outputs remain frozen. This protocol selects a new 600-claim development cohort and 300-claim confirmation cohort from the same pinned 19,998-row public FEVER development file. It excludes every previously evaluated XFEVER and FEVER ID and normalized claim text, and deduplicates normalized text across the two new cohorts. It ranks candidates by SHA-256 of the fixed seed and integer claim ID. Labels and annotated evidence do not enter selection or ranking. The first 600 remaining claims go to development and the next 300 to confirmation.
+
+The selection and file checksums are frozen in `data/external/fever/calibration_v1/selection_manifest.json`. The runner pins this manifest's checksum. Preparation used the existing FEVER source file and verified prior XFEVER export. A `prepare_fever_calibration.py` reproduction script is included; running it over an existing freeze refuses overwrite. It is unnecessary on Windows when the packaged frozen input files are installed.
+
+This is fresh claim confirmation within the same public dataset. It is not a new independent dataset or official blind test. Shared Wikipedia pages and near-duplicate paraphrases may remain. Exclusion checks cover the project's supplied prior XFEVER English and FEVER claims, not the pretrained model's unknown training data.
+
+The runner reuses the separately downloaded, hash-verified FEVER Wikipedia index and the original English NLI model, with identical recorded inference package versions. No new model or archive download is needed. For both new cohorts it uses the existing FTS5 retrieval policy: title weight three, body weight one, top three pages, and up to three selected sentences per page. Each nonempty page excerpt is an NLI premise; the claim is its hypothesis. The fixed model uses CPU float32, seed 369, four threads, batch size eight and pair truncation at 256 tokens. Mean C/E/N probabilities are reordered to Supported, Refuted and NEI with the fixed argmax rule. Raw per-page scores and contexts are saved. Model inference does not open gold labels.
+
+After all development predictions are frozen, the runner opens development gold and fits one positive scalar temperature by minimizing mean negative log likelihood of pooled three-label probabilities. For input probabilities p, it calculates softmax(log(max(p, 1e-12))/T). The predeclared temperature search range is 0.05 to 20; SciPy bounded optimization uses tolerance 1e-8. T=1 is also considered, so the fit cannot increase development NLL. The code and SciPy version are recorded. This transform preserves predicted labels, apart from hypothetical floating-point ties which are checked and rejected. No gate or abstention threshold is fitted.
+
+The runner saves the scalar, its development prediction/gold hashes and checksum before starting confirmation retrieval and inference. Confirmation labels are not read during fitting, retrieval or prediction. It saves and hashes both raw and transformed confirmation predictions, then opens confirmation gold for scoring. It checks the transformed predictions replay exactly and that argmax is unchanged. It records raw and calibrated NLL, Brier, 15-bin top-label ECE, mean confidence, macro F1, accuracy and descriptive risk/coverage at 50%, 80% and 100%. It also reports retrieval evidence-group recall separately. Top-confidence rankings can change across claims, so risk/coverage can change although full-cohort labels do not.
+
+Do not promise calibration will improve confirmation ECE, NLL or Brier. Report the observed comparison even if it worsens. It cannot repair retrieval errors or wrong verdicts, authenticate Tesla-era publishers, validate generated explanations, or establish calibrated performance of the integrated APV-RAG generator/gate. This experiment calibrates only the English retrieved-evidence NLI baseline.
+
+Run from the existing project root:
+
+```powershell
+cd D:\apv-rag-tesla369
+.\.venv\Scripts\python.exe scripts\run_fever_calibration.py
+```
+
+The command performs retrieval, development inference, fitting, confirmation inference and scoring in order. Pair inference resumes under unchanged input/code/package identity. Changed inputs cannot silently reuse caches. An incomplete retrieval `.partial` file after interruption needs removal only after ensuring another run is not active. A completed run is verified and exported without new inference or fitting. Do not run two instances at once.
+
+Outputs are stored in `artifacts/fever_calibration_v1`; the runner creates `D:\apv-rag-tesla369\fever_calibration_outputs.zip` for inspection. The ZIP contains small saved contexts, scores, receipts, the fitted scalar and final metrics. It excludes the Wikipedia archive, index and model weights. Local tests cover probability handling, development fitting, label-preserving transformation, ID/text exclusions, label-independent cohort selection and completed-stage cache validation. Full neural inference requires the Windows weights and index and has not run in this workspace.

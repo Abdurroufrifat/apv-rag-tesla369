@@ -1,0 +1,58 @@
+protocol_version: "0.3"
+mode: machine_only
+random_seeds: [369, 1369, 2369, 3369, 4369]
+
+datasets:
+  primary:
+    name: AVeriTeC
+    role: real_world_web_claim_verification
+    labels: upstream_frozen
+  transfer:
+    name: SciFact
+    role: scientific_claim_verification
+    labels: upstream_frozen
+  multilingual:
+    name: XFEVER
+    role: multilingual_robustness
+    labels: upstream_frozen
+  tesla:
+    name: Tesla-369-Archive
+    role: unlabeled_stress_test
+    labels: prohibited
+
+baselines:
+  - bm25_nli
+  - dense_nli
+  - standard_rag
+  - source_weighted_rag
+  - apv_rag_without_provenance
+  - apv_rag_without_sufficiency
+  - apv_rag_full
+
+metrics:
+  classification: [macro_f1, per_class_f1, balanced_accuracy]
+  retrieval: [recall_at_5, recall_at_10, ndcg_at_10]
+  calibration: [brier_score, ece_15_bin]
+  selective: [aurc, accuracy_at_50_coverage, accuracy_at_80_coverage]
+  provenance: [family_recall_at_10, ribs_auc]
+
+stress_tests:
+  copy_counts: [0, 1, 5, 10, 25]
+  ocr_noise_rates: [0.00, 0.05, 0.10, 0.20]
+  paraphrase_strengths: [none, mild, strong]
+  fabricated_citation: [false, true]
+
+statistics:
+  confidence_level: 0.95
+  bootstrap_repetitions: 2000
+  paired_test: approximate_randomization
+  multiple_comparison_correction: holm
+
+leakage_controls:
+  split_before_augmentation: true
+  group_by_claim: true
+  group_by_provenance_family: true
+  fit_calibration_on_validation_only: true
+  tesla_excluded_from_training: true
+  tesla_excluded_from_model_selection: true
+  tesla_excluded_from_headline_metrics: true

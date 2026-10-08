@@ -1,0 +1,13 @@
+# Multilingual retrieval from an XFEVER excerpt pool
+
+The previous XFEVER experiment supplied the paired evidence directly to the model. This separate diagnostic receives only a claim query and searches a corpus pooled from all 600 evidence excerpts in the same file. Eleven aligned files cover English and existing human/machine translations in Spanish, French, Indonesian, Japanese and Chinese. No new human review is introduced.
+
+The provided dataset contains paired excerpts rather than complete pages. Every target excerpt is included in its file's pool by construction. This limits the difficulty and supports only an optimistic closed-pool retrieval diagnostic. The same observed XFEVER claims are reused; this is neither independent confirmation nor a full multilingual RAG evaluation.
+
+Construct the pool using evidence strings only, without labels or page titles. Collapse exact text after NFKC, casefold and whitespace normalization. Assign the normalized-text SHA256 as its ID and choose the lexicographically smallest original text as representative. Query records contain only row index, original claim ID and claim text. Retrievers must reject any extra label or evidence field. Corpus records contain only excerpt ID and text.
+
+Use BM25 with k1=1.2, b=0.75 and top three positive-score documents. Compare the existing Unicode-word tokenizer with a fixed tokenizer combining non-CJK Unicode words and CJK character unigrams/bigrams. Characters are normalized with NFKC; CJK letter runs break at other characters. Prefix token types so words, characters and bigrams cannot collide. Ties use ascending excerpt IDs. Neither tokenizer uses scoring labels.
+
+Freeze the retrieved outputs before constructing scoring targets. Report paired target-excerpt hit at one and three and reciprocal rank at three. SUPPORTS/REFUTES pairs form the primary descriptive target-retrieval summary. NEI target matching is separate because its supplied passage can be unrelated; it cannot measure evidence sufficiency or factual accuracy. Translated variants share English claim identities and are not independent samples. No significance claim, analyzer tuning, label inference, neural computation or policy selection is performed.
+
+A verify mode reconstructs pools and queries from pinned upstream files, reruns both retrievers, checks output bindings and reproduces all metrics. IDs, text and ordering must match exactly; retrieved BM25 scores allow absolute error of at most 1e-12 for platform math differences. Original model runs and protocols remain unchanged. A downstream model may consume the saved retrieved contexts in a later separately identified experiment; no downstream verdicts, learned gates or confidence calibration are evaluated here.

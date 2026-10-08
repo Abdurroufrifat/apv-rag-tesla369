@@ -1,0 +1,5 @@
+protocol_version: "0.1"
+random_seed: 369
+bootstrap_repetitions: 2000
+target_coverages: [0.50, 0.60, 0.70, 0.80, 0.90, 1.00]
+output_directory: artifacts/phase2g_abstention_model

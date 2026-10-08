@@ -2,7 +2,7 @@
 
 ## Working title
 
-**Repetition Is Not Evidence: Archive- and Provenance-Aware RAG for Verifying the Tesla 3-6-9 Claim and Other Viral Scientific Attributions**
+**Repetition Is Not Evidence: Provenance-Aware and Abstention-Calibrated RAG for Claim Verification, with a Tesla 3-6-9 Archival Stress Test**
 
 ## Problem statement
 
@@ -35,13 +35,21 @@ Can an archive- and provenance-aware retrieval-augmented model verify historical
 - **H3:** A separate sufficiency head will improve selective accuracy at matched coverage.
 - **H4:** Training with provenance and archive perturbations will improve robustness to fabricated citations and OCR degradation.
 
+## Binding evaluation policy
+
+The study performs no new human annotation. Quantitative claims are computed only
+on existing benchmark labels. Tesla records are excluded from supervised training,
+model selection, headline accuracy, and significance testing. They form an
+unlabeled, qualitative stress test, and every Tesla verdict must remain
+`machine_candidate` or `abstain`.
+
 ## Intended contributions
 
-1. **SciAttr-369**, a versioned dataset of scientific-attribution claims with evidence, source type, provenance-family, stance, sufficiency, and verdict labels.
+1. A reproducible benchmark transformation that adds provenance families, temporal metadata, and controlled source-copy perturbations to published fact-verification benchmarks without replacing their original labels.
 2. **APV-RAG**, a modular verification pipeline that reasons over evidence independence and source chronology.
 3. **RIBS** (Repetition-Induced Belief Shift), a stress-test measure quantifying how much a verifier’s confidence changes when semantically redundant copies are added without new evidence.
 4. A controlled evaluation suite for copied misinformation, citation fabrication, persuasive phrasing, evidence absence, and OCR noise.
-5. An auditable Tesla 3-6-9 case study that separates historical documentation from modern interpretation.
+5. An auditable but explicitly unlabeled Tesla 3-6-9 stress test that separates retrieval evidence from historical authentication.
 
 ## Proposed model
 
@@ -74,15 +82,11 @@ The dataset must preserve `insufficient`; it must never be silently converted to
 
 ## Dataset scope
 
-Target for the full paper:
-
-- 500–800 base attribution claims;
-- approximately 100 Tesla-focused claims and variants;
-- multiple scientists, disciplines, eras, and claim types for generalization;
-- 3,000–5,000 total instances after controlled transformations;
-- grouped train/development/test splits by canonical claim and provenance family.
-
-The minimum viable study may begin with 150–250 carefully annotated base claims, provided the evaluation is statistically honest and a larger external benchmark is used.
+- AVeriTeC is the primary real-world, web-evidence benchmark.
+- SciFact is a scientific-claim transfer benchmark.
+- XFEVER is a multilingual robustness benchmark.
+- Tesla claims are held out from all supervised learning and quantitative model comparison.
+- Controlled copies, OCR corruption, paraphrases, and fabricated citations are generated only after splitting, with every derivative kept in its parent split.
 
 ## Baselines
 
@@ -124,8 +128,8 @@ Primary target: **Information Processing & Management**. Plausible alternatives 
 | Stage | Deliverable | Exit criterion |
 |---|---|---|
 | 0. Setup | Reproducible local + Colab environment | Tests and environment checks pass |
-| 1. Protocol | Search strategy, ontology, pilot annotation | 20 Tesla records double-checked |
-| 2. Dataset | Versioned SciAttr-369 release candidate | Agreement and leakage audit completed |
+| 1. Protocol | Search strategy, ontology, archival pilot | Machine-only boundary validated |
+| 2. Dataset | Frozen benchmark adapters and split manifests | Label integrity and leakage audit completed |
 | 3. Baselines | Reproducible retrieval/verifier results | Baseline table frozen |
 | 4. APV-RAG | Provenance graph and dual-head verifier | Ablations run successfully |
 | 5. Robustness | Five controlled stress tests | Statistical analysis complete |
@@ -140,4 +144,3 @@ Proceed to the full dataset only if the pilot shows:
 - a meaningful number of copied-source families exists;
 - the test instances are not answerable by trivial keyword matching alone; and
 - the planned contribution remains distinct from closely related published work.
-

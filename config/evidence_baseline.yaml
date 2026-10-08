@@ -1,0 +1,17 @@
+protocol_version: "0.1"
+random_seed: 369
+variants:
+  - claim_only
+  - claim_plus_evidence
+regularization_c:
+  - 0.25
+  - 1.0
+  - 4.0
+tfidf:
+  ngram_range: [1, 2]
+  min_df: 2
+  max_features: 50000
+calibration_cv: 5
+ece_bins: 15
+target_coverages: [0.50, 0.80, 1.00]
+output_directory: artifacts/phase2c_evidence_baseline

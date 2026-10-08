@@ -1,5 +1,8 @@
 # Phase 1B independent human-review sheet
 
+> **Archived:** No human-review stage will be conducted. Existing benchmark labels
+> replace project-specific annotation for all quantitative experiments.
+
 Do not inspect `data/pilot/tesla_phase1b_verdicts_v0_1.csv` while assigning an
 independent label. That file is machine-assisted pre-annotation and may bias you.
 

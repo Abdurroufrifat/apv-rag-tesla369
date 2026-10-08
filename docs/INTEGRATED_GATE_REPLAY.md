@@ -1,0 +1,11 @@
+# Experimental integrated gate replay
+
+Connect the frozen annotation-completeness classifiers to the existing sentence-selected SciFact and two climate generation exports. Preserve their verdicts and explanations. Compare NLI, embedding and combined gates with a no-gate policy, using a fixed threshold of 0.5. Numeric extractor v2 applies equally to every policy. Report coverage, all-claim accuracy/F1 and answered accuracy. Higher accuracy on a smaller selected cohort does not establish overall improvement.
+
+Context collapse retains the first source per provided ID/family or identical whitespace-normalized text. This handles declared dependence; it does not authenticate sources or establish independence. A synthetic copy test adds five copies of the first context. The collapsed input must remain identical; the probability shift without collapse is recorded separately. This measures gate sensitivity, not generation robustness under copied prompts.
+
+Features use the saved clipped claim and context, with the trained feature models and aggregation. Transfer from constructed sentence-level completeness pairs to multi-sentence passages remains unvalidated. Settings: NLI pair limit 256 tokens, MiniLM limit 384 tokens, CPU float32, seed 369, four threads. Rationale annotations and verdict labels do not enter gating; verdict labels only score results. Explanations were generated before the gates. This is a policy replay, not a generation pipeline conditioned on provenance. Probabilities and the threshold are not calibrated for deployment. All observed cohorts remain exploratory.
+
+Input, model, code and protocol hashes protect a resumable feature cache. Existing local models are reused. Output: `artifacts/integrated_gate_replay_v1`. Run `python scripts\run_integrated_gate_replay.py` from `D:\apv-rag-tesla369`. Full generation integration and source authentication remain open.
+
+Before release, the new probability helper reproduced all 294 saved validation predictions within 1e-10. All 900 saved RAG records passed context/copy and numeric-policy checks. Syntax, imports, threshold boundaries and nonfinite-probability rejection passed. Neural inference and the full test suite were not run in this environment.

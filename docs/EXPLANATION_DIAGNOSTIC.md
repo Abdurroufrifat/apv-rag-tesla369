@@ -1,0 +1,7 @@
+# Machine-only explanation diagnostic
+
+The batch compares saved English explanations with each saved evidence passage using the pinned local NLI model. It includes 600 original no-gate explanations and 240 changed-text explanations from the fixed stress sample. The duplicated stress baselines, missing-evidence cases and benchmark truth labels are excluded. No model is trained and no threshold is selected.
+
+One premise is one evidence passage; the hypothesis is the full generated explanation. The model uses the declared contradiction, entailment and neutral order and at most 256 paired tokens. Oversize pairs are recorded without truncation or scores. Literal quotes are counted separately against the claim and supplied evidence. A high entailment score does not prove that a source is genuine, a generated explanation is fully true, or multiple passages jointly support it. A low score is also not a gold error label, especially for Not Enough Evidence explanations. Interpret results descriptively on already observed development data.
+
+The launcher uses the existing `D:\apv-rag-tesla369` virtual environment and local `models\nli-deberta-v3-small`, checks pinned model files and package versions, resumes incomplete score caches with exact input identity, verifies outputs and creates `explanation_diagnostic_outputs.zip`. It performs no download. Run `scripts\run_explanation_diagnostic_windows.cmd` from PowerShell inside the project folder. The ZIP excludes weights and caches. No human review, manuscript or GitHub action is included.

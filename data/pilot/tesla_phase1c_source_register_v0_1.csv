@@ -1,0 +1,2 @@
+capture_id,claim_id,evidence_id,source_url,source_date,article_title,printed_page,column,private_relative_path,sha256,redistribution_status,review_status,protocol_version
+CAP-001,T369-004,EVID-112,https://digitalna.nb.rs/view/URN:NB:RS:SD_2F6F6602455A67B1B521D786232CBF4A-1927-04-27,1927-04-27,Посета г. Николи Тесли,2,1,data/raw/T369-004/politika_1927-04-27_p2_col1_target.png,39a7695ede14d18c8f012882fe92a6d4ab9bd995fdc68dea35d3d6efc80cb2a6,private_research_copy_do_not_commit,machine_located_pending_bilingual_review,0.2

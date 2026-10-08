@@ -1,0 +1,9 @@
+protocol_version: "0.1"
+random_seed: 369
+copy_counts: [0, 1, 5, 10, 25]
+regularization_c: 1.0
+word_tfidf: {ngram_range: [1, 2], min_df: 2, max_features: 50000}
+char_tfidf: {ngram_range: [3, 5], min_df: 2, max_features: 75000}
+calibration_cv: 5
+bootstrap_repetitions: 2000
+output_directory: artifacts/phase2h_repetition_stress

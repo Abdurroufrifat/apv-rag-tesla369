@@ -1,0 +1,12 @@
+protocol_version: "0.1"
+source_dataset: AVeriTeC
+source_split: train
+random_seed: 369
+validation_fraction: 0.20
+random_search_trials: 5000
+grouping_keys:
+  - normalized_claim
+  - normalized_fact_checking_article
+exclude_empty_claims: true
+official_dev_policy: evaluation_only
+output_directory: data/processed/averitec/phase2b_split_v0_1

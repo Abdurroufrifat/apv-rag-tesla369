@@ -1,0 +1,10 @@
+protocol_version: "0.1"
+random_seed: 369
+representations: [phase2e, provenance_only, phase2e_plus_provenance]
+regularization_c: [0.25, 1.0, 4.0]
+word_tfidf: {ngram_range: [1, 2], min_df: 2, max_features: 50000}
+char_tfidf: {ngram_range: [3, 5], min_df: 2, max_features: 75000}
+calibration_cv: 5
+ece_bins: 15
+target_coverages: [0.50, 0.80, 1.00]
+output_directory: artifacts/phase2f_provenance_model
